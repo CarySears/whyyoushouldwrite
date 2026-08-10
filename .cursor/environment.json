@@ -1,0 +1,16 @@
+{
+  "name": "Why You Should Write",
+  "terminals": [
+    {
+      "name": "web",
+      "command": "python3 -m http.server 8000 --bind 0.0.0.0",
+      "description": "Serves the static landing page at http://localhost:8000 (open index.html)."
+    }
+  ],
+  "ports": [
+    {
+      "name": "web",
+      "port": 8000
+    }
+  ]
+}
