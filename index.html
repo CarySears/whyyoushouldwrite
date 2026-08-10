@@ -339,20 +339,22 @@
 
   @media (max-width:760px){
     .topbar .wrap{
-      gap:12px;
+      flex-wrap:wrap;
+      gap:10px 12px;
+      align-items:center;
+      justify-content:space-between;
     }
     .brand{
       gap:10px;
       min-width:0;
       flex:1 1 auto;
-      max-width:calc(100% - 138px);
     }
-    .brand img{height:52px;}
+    .brand img{height:48px;}
     .brand-name{
-      font-size:.85rem;
-      letter-spacing:.04em;
-      overflow:hidden;
-      text-overflow:ellipsis;
+      font-size:.82rem;
+      letter-spacing:.03em;
+      line-height:1.2;
+      white-space:normal;
     }
     .topbar .cta-mini{
       flex-shrink:0;
@@ -365,9 +367,18 @@
     .reassure{padding:40px 24px;}
   }
 
-  @media (max-width:420px){
-    .brand-name{display:none;}
-    .brand{max-width:none;}
+  @media (max-width:520px){
+    .topbar .wrap{
+      justify-content:center;
+    }
+    .brand{
+      flex:1 1 100%;
+      justify-content:center;
+      text-align:center;
+    }
+    .topbar .cta-mini{
+      margin:0 auto;
+    }
   }
 
   :focus-visible{outline:2px solid var(--coral);outline-offset:3px;}
