@@ -47,11 +47,27 @@
   }
   .topbar .wrap{
     display:flex;align-items:center;justify-content:space-between;
-    padding-top:16px;padding-bottom:16px;
+    padding-top:20px;padding-bottom:20px;
   }
   .brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    text-decoration:none;
+    line-height:1;
+  }
+  .brand img{
+    height:68px;
+    width:auto;
+    flex-shrink:0;
+  }
+  .brand-name{
     font-family:'Playfair Display',serif;
-    font-weight:600;font-size:1.1rem;color:var(--rust);
+    font-size:clamp(1rem, 2.2vw, 1.25rem);
+    font-weight:500;
+    letter-spacing:.06em;
+    color:var(--rust);
+    white-space:nowrap;
   }
   .topbar .cta-mini{
     font-family:'Inter',sans-serif;font-weight:600;font-size:.85rem;
@@ -245,6 +261,9 @@
   footer a{text-decoration:underline;text-underline-offset:3px;}
 
   @media (max-width:760px){
+    .brand img{height:52px;}
+    .brand{gap:10px;}
+    .brand-name{font-size:.95rem;letter-spacing:.04em;}
     .learn{grid-template-columns:1fr;}
     .hosts{flex-direction:column;}
     .doubts{padding:28px 22px;}
@@ -258,7 +277,10 @@
 
 <div class="topbar">
   <div class="wrap">
-    <div class="brand">Why You Should Write</div>
+    <a class="brand" href="https://annabrookehealing.com" aria-label="Anna Brooke Healing">
+      <img src="This-logo.jpg" alt="">
+      <span class="brand-name">Anna Brooke Healing</span>
+    </a>
     <a class="cta-mini" href="https://events.humanitix.com/why-you-should-write-mwzlymzs/tickets">Reserve your seat</a>
   </div>
 </div>
@@ -376,9 +398,6 @@
       </div>
     </div>
 
-    <p style="margin-top:22px;font-family:'Inter',sans-serif;font-size:.85rem;">
-      <a href="https://events.humanitix.com/host/anna-brooke-and-vindy-teja">See more events from Anna &amp; Vindy →</a>
-    </p>
   </div>
 </section>
 
