@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Why You Should Write · A Free Class with Anna Brooke &amp; Vindy Teja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Source+Serif+Pro:ital,wght@0,400;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rust:#9b4d32;
+    --coral:#e27756;
+    --shell:#f3d9d0;
+    --sand:#f2ede2;
+    --ochre:#ce8f29;
+    --sea:#164a50;
+    --sky:#a3b6e5;
+    --paper:#fbf8f2;
+    --ink: var(--sea);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Source Serif Pro', Georgia, serif;
+    background:var(--sand);
+    color:var(--ink);
+    line-height:1.65;
+    overflow-x:hidden;
+  }
+  .label{
+    font-family:'Inter',sans-serif;
+    font-size:.72rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    font-weight:600;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:rgba(242,237,226,.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid rgba(22,74,80,.1);
+  }
+  .topbar .wrap{
+    display:flex;align-items:center;justify-content:space-between;
+    padding-top:16px;padding-bottom:16px;
+  }
+  .brand{
+    font-family:'Playfair Display',serif;
+    font-weight:600;font-size:1.1rem;color:var(--rust);
+  }
+  .topbar .cta-mini{
+    font-family:'Inter',sans-serif;font-weight:600;font-size:.85rem;
+    background:var(--coral);color:var(--paper);
+    padding:10px 20px;border-radius:100px;text-decoration:none;
+    transition:transform .15s ease, box-shadow .15s ease;
+    white-space:nowrap;
+  }
+  .topbar .cta-mini:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(226,119,86,.35);}
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding:88px 0 70px;
+    text-align:center;
+  }
+  .hero .kicker{color:var(--rust);margin-bottom:22px;}
+  .hero h1{
+    font-family:'Playfair Display',serif;
+    font-weight:700;
+    font-size:clamp(2.6rem, 7vw, 4.6rem);
+    color:var(--sea);
+    line-height:1.05;
+    max-width:760px;
+    margin:0 auto;
+  }
+  .typewriter-wrap{
+    margin:34px auto 8px;
+    display:flex;justify-content:center;
+  }
+  .typewriter{
+    font-family:'Playfair Display',serif;
+    font-style:italic;font-weight:500;
+    font-size:clamp(1.2rem,3vw,1.6rem);
+    color:var(--coral);
+    white-space:nowrap;
+    overflow:hidden;
+    border-right:2px solid var(--coral);
+    width:0;
+    animation: type 2.1s steps(32,end) .5s forwards, blink .8s step-end infinite;
+  }
+  @keyframes type{ from{width:0;} to{width:30ch;} }
+  @keyframes blink{ 50%{ border-color:transparent; } }
+  @media (prefers-reduced-motion: reduce){
+    .typewriter{ width:30ch; animation:none; border-right:none; }
+  }
+  .hero p.sub{
+    font-size:1.2rem;
+    max-width:560px;
+    margin:20px auto 34px;
+    color:var(--ink);
+  }
+  .meta-row{
+    display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:36px;
+  }
+  .meta-chip{
+    font-family:'Inter',sans-serif;font-size:.82rem;font-weight:500;
+    background:var(--paper);border:1px solid rgba(22,74,80,.15);
+    padding:9px 16px;border-radius:100px;color:var(--sea);
+    display:flex;align-items:center;gap:7px;
+  }
+  .meta-chip strong{font-weight:700;}
+  .cta-primary{
+    font-family:'Inter',sans-serif;font-weight:700;font-size:1.02rem;
+    background:var(--coral);color:var(--paper);
+    padding:17px 40px;border-radius:100px;text-decoration:none;
+    display:inline-block;
+    box-shadow:0 10px 26px rgba(226,119,86,.32);
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .cta-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(226,119,86,.42);}
+  .cta-note{
+    font-family:'Inter',sans-serif;font-size:.8rem;color:var(--rust);
+    margin-top:14px;opacity:.85;
+  }
+
+  /* ---------- section shell ---------- */
+  section{padding:78px 0;}
+  .section-title{
+    font-family:'Playfair Display',serif;
+    font-weight:600;font-style:italic;
+    font-size:clamp(1.9rem,4vw,2.6rem);
+    color:var(--rust);
+    margin-bottom:18px;
+  }
+  .section-lede{max-width:640px;font-size:1.12rem;margin-bottom:44px;}
+
+  /* ---------- doubts (signature) ---------- */
+  .doubts{
+    background:var(--paper);
+    border:1px solid rgba(22,74,80,.12);
+    border-radius:20px;
+    padding:44px;
+  }
+  .doubt-line{
+    font-family:'Playfair Display',serif;
+    font-size:clamp(1.15rem,2.4vw,1.4rem);
+    color:var(--sea);
+    opacity:.55;
+    text-decoration:line-through;
+    text-decoration-color:var(--coral);
+    text-decoration-thickness:2px;
+    padding:10px 0;
+    border-bottom:1px dashed rgba(22,74,80,.15);
+  }
+  .doubt-line:last-of-type{border-bottom:none;}
+  .doubts-resolve{
+    margin-top:28px;
+    font-family:'Playfair Display',serif;
+    font-style:italic;font-weight:600;
+    font-size:clamp(1.3rem,2.8vw,1.7rem);
+    color:var(--rust);
+  }
+
+  /* ---------- learn grid ---------- */
+  .learn{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;}
+  .learn-card{
+    background:var(--shell);
+    border-radius:18px;
+    padding:28px 26px;
+  }
+  .learn-card .glyph{
+    font-family:'Playfair Display',serif;font-style:italic;font-size:2rem;
+    color:var(--coral);margin-bottom:12px;display:block;
+  }
+  .learn-card p{font-size:1rem;color:var(--sea);}
+
+  /* ---------- bring / reassure ---------- */
+  .reassure{
+    background:var(--sea);color:var(--paper);border-radius:20px;
+    padding:52px 44px;text-align:center;
+  }
+  .reassure .section-title{color:var(--shell);}
+  .reassure p{color:var(--paper);max-width:600px;margin:0 auto 30px;font-size:1.1rem;opacity:.92;}
+  .reassure .cta-primary{background:var(--ochre);}
+  .reassure .cta-primary:hover{box-shadow:0 14px 30px rgba(206,143,41,.45);}
+
+  /* ---------- hosts ---------- */
+  .hosts{display:flex;gap:32px;align-items:flex-start;flex-wrap:wrap;}
+  .host-card{
+    flex:1 1 260px;background:var(--paper);border:1px solid rgba(22,74,80,.12);
+    border-radius:18px;padding:28px;
+  }
+  .host-card .label{color:var(--ochre);margin-bottom:8px;}
+  .host-card h3{font-family:'Playfair Display',serif;color:var(--sea);font-size:1.3rem;margin-bottom:10px;}
+  .host-card p{font-size:.98rem;}
+  .host-card a{color:var(--rust);font-weight:600;text-decoration:underline;text-underline-offset:3px;}
+  .host-card .credit{font-size:.88rem;margin-top:12px;opacity:.8;font-style:italic;}
+  .hosts-lede{max-width:600px;font-size:1.08rem;margin-bottom:36px;}
+  .hosts-together{max-width:640px;font-size:1.08rem;margin:34px auto 0;text-align:center;font-style:italic;color:var(--rust);}
+  .stats-row{
+    display:flex;gap:48px;justify-content:center;margin:44px 0;flex-wrap:wrap;
+  }
+  .stat{text-align:center;}
+  .stat .num{
+    font-family:'Playfair Display',serif;font-weight:700;font-size:2.4rem;color:var(--coral);display:block;
+  }
+  .stat .stat-label{color:var(--sea);margin-top:4px;}
+  .book-card{
+    background:var(--shell);border-radius:18px;padding:32px;
+    display:flex;gap:22px;align-items:flex-start;flex-wrap:wrap;
+  }
+  .book-card .label{color:var(--ochre);margin-bottom:10px;}
+  .book-card h3{font-family:'Playfair Display',serif;font-style:italic;color:var(--sea);font-size:1.35rem;margin-bottom:10px;}
+  .book-card p{font-size:.98rem;}
+
+  /* ---------- faq ---------- */
+  .faq-item{border-bottom:1px solid rgba(22,74,80,.15);padding:22px 0;}
+  .faq-item h3{
+    font-family:'Inter',sans-serif;font-size:1.02rem;font-weight:700;color:var(--sea);margin-bottom:8px;
+  }
+  .faq-item p{font-size:.98rem;}
+
+  /* ---------- final cta ---------- */
+  .final{
+    text-align:center;padding:90px 0 110px;
+  }
+  .final h2{
+    font-family:'Playfair Display',serif;font-weight:700;
+    font-size:clamp(2.2rem,5vw,3.2rem);color:var(--sea);margin-bottom:18px;
+  }
+  .final p{max-width:520px;margin:0 auto 32px;font-size:1.1rem;}
+
+  footer{
+    border-top:1px solid rgba(22,74,80,.15);
+    padding:36px 0;
+  }
+  footer .wrap{
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;
+    font-family:'Inter',sans-serif;font-size:.82rem;color:var(--rust);opacity:.8;
+  }
+  footer a{text-decoration:underline;text-underline-offset:3px;}
+
+  @media (max-width:760px){
+    .learn{grid-template-columns:1fr;}
+    .hosts{flex-direction:column;}
+    .doubts{padding:28px 22px;}
+    .reassure{padding:40px 24px;}
+  }
+
+  :focus-visible{outline:2px solid var(--coral);outline-offset:3px;}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand">Why You Should Write</div>
+    <a class="cta-mini" href="https://events.humanitix.com/why-you-should-write-mwzlymzs/tickets">Reserve your seat</a>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="label kicker">A free writing class with Anna Brooke &amp; Vindy Teja</div>
+    <h1>Are you ready to start writing the stories that live inside you?</h1>
+
+    <div class="typewriter-wrap">
+      <span class="typewriter">There's a story only you can tell.</span>
+    </div>
+
+    <p class="sub">A free, one-hour class dedicated to writing your story down, in your own words. No experience necessary, just a willingness to begin.</p>
+
+    <div class="meta-row">
+      <div class="meta-chip">📅 <strong>Wed, August 26</strong></div>
+      <div class="meta-chip">🕢 <strong>7:30–8:30pm EDT</strong></div>
+      <div class="meta-chip">💻 <strong>Online via Zoom</strong></div>
+      <div class="meta-chip">🌿 <strong>Free</strong></div>
+    </div>
+
+    <a class="cta-primary" href="https://events.humanitix.com/why-you-should-write-mwzlymzs/tickets">Save my free seat</a>
+    <div class="cta-note">Limited spots · Zoom link sent one hour before class</div>
+  </div>
+</header>
+
+<section id="doubts">
+  <div class="wrap">
+    <div class="section-title">You don't need permission. Just a page.</div>
+    <p class="section-lede">Almost everyone who wants to write carries the same handful of doubts. This class is built to quiet them, not answer them, just quiet them long enough to let you start.</p>
+
+    <div class="doubts">
+      <div class="doubt-line">"I'm not a real writer."</div>
+      <div class="doubt-line">"I don't know where to start."</div>
+      <div class="doubt-line">"No one wants to hear this."</div>
+      <div class="doubts-resolve">None of that is required to begin. Just you, and the page.</div>
+    </div>
+  </div>
+</section>
+
+<section id="learn">
+  <div class="wrap">
+    <div class="section-title">What you'll learn and experiment with</div>
+    <p class="section-lede">Over the course of one hour, live with Anna and Vindy.</p>
+
+    <div class="learn">
+      <div class="learn-card">
+        <span class="glyph">✎</span>
+        <p>Cultivating a creative mindset to establish and nurture your writing practice.</p>
+      </div>
+      <div class="learn-card">
+        <span class="glyph">✧</span>
+        <p>Support for overcoming writer's block, whatever shape it takes for you.</p>
+      </div>
+      <div class="learn-card">
+        <span class="glyph">❦</span>
+        <p>Neutralizing your inner critic and letting your self-expression flourish.</p>
+      </div>
+      <div class="learn-card">
+        <span class="glyph">☀</span>
+        <p>Trusting the power and truth of your own voice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="bring">
+  <div class="wrap">
+    <div class="reassure">
+      <div class="section-title">All you need to bring</div>
+      <p>Your journal and a pen, or a blank doc on your computer. That's the entire requirement. Come ready to write.</p>
+      <a class="cta-primary" href="https://events.humanitix.com/why-you-should-write-mwzlymzs/tickets">Join us on August 26</a>
+    </div>
+  </div>
+</section>
+
+<section id="hosts">
+  <div class="wrap">
+    <div class="section-title">Hosted by</div>
+    <p class="hosts-lede">Two guides bringing together emotional safety, creative encouragement, and practical structure.</p>
+    <div class="hosts">
+      <div class="host-card">
+        <div class="label">Host</div>
+        <h3>Anna Brooke</h3>
+        <p>For more than twenty years, Anna has supported people through transitions both big and small. Her work offers a soft place to land while helping people reconnect with their truth, voice, and inner wisdom.</p>
+        <p class="credit">Her work has been featured in Huffington Post, BuzzFeed, and Page Six.</p>
+      </div>
+      <div class="host-card">
+        <div class="label">Co-host</div>
+        <h3>Vindy Teja</h3>
+        <p>Vindy Teja is a Professional Life &amp; Divorce Coach, TEDx Speaker, author, and writing mentor.</p>
+        <p class="credit">Author of the award-winning book <em>YOLO: Essential Life Hacks for Happiness</em>, and co-author of <em>Passed Down From Mom</em> and <em>Inspiring True Stories of Everyday Heroes</em>.</p>
+      </div>
+    </div>
+
+    <p class="hosts-together">Together, Anna and Vindy combine compassionate guidance with grounded structure to help people finally begin telling the stories they have been carrying.</p>
+
+    <div class="stats-row">
+      <div class="stat">
+        <span class="num">1,000+</span>
+        <span class="label stat-label">Writers guided</span>
+      </div>
+      <div class="stat">
+        <span class="num">28</span>
+        <span class="label stat-label">Countries &amp; counting</span>
+      </div>
+    </div>
+
+    <div class="book-card">
+      <div>
+        <div class="label">Co-authors of</div>
+        <h3>WRITE! Your Guide to Revealing the Writer Within</h3>
+        <p>A practical and encouraging guide designed to help writers access their creativity and begin putting words to page.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:22px;font-family:'Inter',sans-serif;font-size:.85rem;">
+      <a href="https://events.humanitix.com/host/anna-brooke-and-vindy-teja">See more events from Anna &amp; Vindy →</a>
+    </p>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <div class="section-title">Good to know</div>
+    <div class="faq-item">
+      <h3>Is this really free?</h3>
+      <p>Yes, Why You Should Write is a free, one-hour class. You just need to reserve a ticket to get the Zoom link.</p>
+    </div>
+    <div class="faq-item">
+      <h3>How do I join?</h3>
+      <p>It's held live on Zoom. Your access link is delivered by email one hour before the class begins.</p>
+    </div>
+    <div class="faq-item">
+      <h3>What if I can't make it after registering?</h3>
+      <p>No worries, it's free. Just cancel your registration if you can, so your spot opens up for someone else.</p>
+    </div>
+    <div class="faq-item">
+      <h3>Do I need any writing experience?</h3>
+      <p>None at all. Bring your journal and pen, or a blank doc, and come as you are.</p>
+    </div>
+  </div>
+</section>
+
+<section class="final" id="reserve">
+  <div class="wrap">
+    <h2>The page is waiting.</h2>
+    <p>One hour, one Zoom link, zero pressure. Bring your story, we'll help with the rest.</p>
+    <a class="cta-primary" href="https://events.humanitix.com/why-you-should-write-mwzlymzs/tickets">Save my free seat</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>Why You Should Write · Wed, August 26, 2026 · Online</div>
+    <div><a href="https://events.humanitix.com/why-you-should-write-mwzlymzs">View original event page ↗</a></div>
+  </div>
+</footer>
+
+</body>
+</html>
