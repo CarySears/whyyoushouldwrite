@@ -114,12 +114,13 @@
     overflow:hidden;
     border-right:2px solid var(--coral);
     width:0;
-    animation: type 2.1s steps(32,end) .5s forwards, blink .8s step-end infinite;
+    --type-ch:30;
+    animation: type 2.1s steps(var(--type-ch),end) .5s forwards, blink .8s step-end infinite;
   }
-  @keyframes type{ from{width:0;} to{width:30ch;} }
+  @keyframes type{ from{width:0;} to{width:calc(var(--type-ch) * 1ch);} }
   @keyframes blink{ 50%{ border-color:transparent; } }
   @media (prefers-reduced-motion: reduce){
-    .typewriter{ width:30ch; animation:none; border-right:none; }
+    .typewriter{ width:calc(var(--type-ch) * 1ch); animation:none; border-right:none; }
   }
   .hero p.sub{
     font-size:1.2rem;
@@ -174,20 +175,57 @@
     font-family:'Playfair Display',serif;
     font-size:clamp(1.15rem,2.4vw,1.4rem);
     color:var(--sea);
-    opacity:.55;
-    text-decoration:line-through;
-    text-decoration-color:var(--coral);
-    text-decoration-thickness:2px;
+    opacity:1;
     padding:10px 0;
     border-bottom:1px dashed rgba(22,74,80,.15);
+    position:relative;
+    text-decoration:none;
+  }
+  .doubt-line::after{
+    content:'';
+    position:absolute;
+    left:0;
+    top:50%;
+    height:2px;
+    width:0;
+    background:var(--coral);
+    transition:width .65s cubic-bezier(.4,0,.2,1);
+  }
+  .doubt-line.is-crossed{
+    opacity:.55;
+  }
+  .doubt-line.is-crossed::after{
+    width:100%;
   }
   .doubt-line:last-of-type{border-bottom:none;}
-  .doubts-resolve{
+  .doubts-resolve-wrap{
     margin-top:28px;
+    min-height:2.4em;
+  }
+  .doubts-typewriter{
     font-family:'Playfair Display',serif;
     font-style:italic;font-weight:600;
     font-size:clamp(1.3rem,2.8vw,1.7rem);
     color:var(--rust);
+    white-space:nowrap;
+    overflow:hidden;
+    border-right:2px solid var(--rust);
+    width:0;
+    --type-ch:52;
+    display:inline-block;
+    vertical-align:top;
+  }
+  .doubts-typewriter.is-typing{
+    animation: type 2.4s steps(var(--type-ch),end) forwards, blink-rust .8s step-end infinite;
+  }
+  .doubts-typewriter.is-done{
+    width:calc(var(--type-ch) * 1ch);
+    border-right:none;
+  }
+  @keyframes blink-rust{ 50%{ border-color:transparent; } }
+  @media (prefers-reduced-motion: reduce){
+    .doubt-line.is-crossed::after{width:100%;transition:none;}
+    .doubts-typewriter.is-done{width:calc(var(--type-ch) * 1ch);}
   }
 
   /* ---------- learn grid ---------- */
@@ -278,7 +316,21 @@
     .hosts{flex-direction:column;}
     .doubts{padding:28px 22px;}
     .reassure{padding:40px 24px;}
+    .doubts-typewriter{
+      white-space:normal;
+      display:block;
+      width:auto;
+      max-width:100%;
+      border-right:none;
+      opacity:0;
+    }
+    .doubts-typewriter.is-typing,
+    .doubts-typewriter.is-done{
+      animation:resolve-fade .8s ease forwards;
+      width:auto;
+    }
   }
+  @keyframes resolve-fade{from{opacity:0;}to{opacity:1;}}
 
   :focus-visible{outline:2px solid var(--coral);outline-offset:3px;}
 </style>
@@ -328,7 +380,9 @@
       <div class="doubt-line">"I'm not a real writer."</div>
       <div class="doubt-line">"I don't know where to start."</div>
       <div class="doubt-line">"No one wants to hear this."</div>
-      <div class="doubts-resolve">None of that is required to begin. Just you, and the page.</div>
+      <div class="doubts-resolve-wrap">
+        <span class="doubts-typewriter">None of that is required to begin. Just you, and the page.</span>
+      </div>
     </div>
   </div>
 </section>
@@ -441,11 +495,67 @@
     <p>One hour, one Zoom link, zero pressure. Bring your story, we'll help with the rest.</p>
     <a class="cta-primary" href="https://events.humanitix.com/why-you-should-write-mwzlymzs/tickets">Save my free seat</a>
     <div class="cta-note">Zoom link sent upon registration</div>
+  </div>
+</section>
+
+<footer>
   <div class="wrap">
     <div>Why You Should Write · Wed, August 26, 2026 · Online</div>
     <div><a href="https://events.humanitix.com/why-you-should-write-mwzlymzs">View original event page ↗</a></div>
   </div>
 </footer>
+
+<script>
+(function () {
+  var doubtLines = document.querySelectorAll('.doubt-line');
+  var resolveTypewriter = document.querySelector('.doubts-typewriter');
+  if (!doubtLines.length || !resolveTypewriter) return;
+
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var crossedCount = 0;
+
+  function startResolve() {
+    if (resolveTypewriter.classList.contains('is-typing') || resolveTypewriter.classList.contains('is-done')) return;
+    if (reduceMotion) {
+      resolveTypewriter.classList.add('is-done');
+      return;
+    }
+    resolveTypewriter.classList.add('is-typing');
+    resolveTypewriter.addEventListener('animationend', function (e) {
+      if (e.animationName === 'type' || e.animationName === 'resolve-fade') {
+        resolveTypewriter.classList.remove('is-typing');
+        resolveTypewriter.classList.add('is-done');
+      }
+    }, { once: true });
+  }
+
+  function crossLine(line) {
+    if (line.classList.contains('is-crossed')) return;
+    line.classList.add('is-crossed');
+    crossedCount += 1;
+    if (crossedCount === doubtLines.length) {
+      setTimeout(startResolve, reduceMotion ? 0 : 450);
+    }
+  }
+
+  if (reduceMotion) {
+    doubtLines.forEach(function (line) { line.classList.add('is-crossed'); });
+    startResolve();
+    return;
+  }
+
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        crossLine(entry.target);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.75, rootMargin: '0px 0px -8% 0px' });
+
+  doubtLines.forEach(function (line) { observer.observe(line); });
+})();
+</script>
 
 </body>
 </html>
