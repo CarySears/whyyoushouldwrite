@@ -338,13 +338,36 @@
   footer a{text-decoration:underline;text-underline-offset:3px;}
 
   @media (max-width:760px){
+    .topbar .wrap{
+      gap:12px;
+    }
+    .brand{
+      gap:10px;
+      min-width:0;
+      flex:1 1 auto;
+      max-width:calc(100% - 138px);
+    }
     .brand img{height:52px;}
-    .brand{gap:10px;}
-    .brand-name{font-size:.95rem;letter-spacing:.04em;}
+    .brand-name{
+      font-size:.85rem;
+      letter-spacing:.04em;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .topbar .cta-mini{
+      flex-shrink:0;
+      padding:9px 14px;
+      font-size:.74rem;
+    }
     .learn{grid-template-columns:1fr;}
     .hosts{flex-direction:column;}
     .doubts{padding:28px 22px;}
     .reassure{padding:40px 24px;}
+  }
+
+  @media (max-width:420px){
+    .brand-name{display:none;}
+    .brand{max-width:none;}
   }
 
   :focus-visible{outline:2px solid var(--coral);outline-offset:3px;}
