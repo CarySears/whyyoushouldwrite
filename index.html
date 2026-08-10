@@ -201,6 +201,7 @@
   .doubts-resolve-wrap{
     margin-top:28px;
     min-height:2.4em;
+    width:100%;
     text-align:center;
   }
   .doubts-typewriter{
@@ -208,25 +209,21 @@
     font-style:italic;font-weight:600;
     font-size:clamp(1.3rem,2.8vw,1.7rem);
     color:var(--rust);
-    white-space:nowrap;
-    overflow:hidden;
-    border-right:2px solid var(--rust);
-    width:0;
-    --type-ch:73;
+    text-align:center;
+    white-space:normal;
+    max-width:36em;
     display:inline-block;
-    vertical-align:top;
   }
   .doubts-typewriter.is-typing{
-    animation: type 3.2s steps(var(--type-ch),end) forwards, blink-rust .8s step-end infinite;
+    border-right:2px solid var(--rust);
+    animation:blink-rust .8s step-end infinite;
   }
   .doubts-typewriter.is-done{
-    width:calc(var(--type-ch) * 1ch);
     border-right:none;
   }
   @keyframes blink-rust{ 50%{ border-color:transparent; } }
   @media (prefers-reduced-motion: reduce){
     .doubt-line.is-crossed::after{width:100%;transition:none;}
-    .doubts-typewriter.is-done{width:calc(var(--type-ch) * 1ch);}
   }
 
   /* ---------- learn grid ---------- */
@@ -317,21 +314,7 @@
     .hosts{flex-direction:column;}
     .doubts{padding:28px 22px;}
     .reassure{padding:40px 24px;}
-    .doubts-typewriter{
-      white-space:normal;
-      display:block;
-      width:auto;
-      max-width:100%;
-      border-right:none;
-      opacity:0;
-    }
-    .doubts-typewriter.is-typing,
-    .doubts-typewriter.is-done{
-      animation:resolve-fade .8s ease forwards;
-      width:auto;
-    }
   }
-  @keyframes resolve-fade{from{opacity:0;}to{opacity:1;}}
 
   :focus-visible{outline:2px solid var(--coral);outline-offset:3px;}
 </style>
@@ -515,19 +498,27 @@
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var crossedCount = 0;
 
+  var resolveText = resolveTypewriter.textContent.trim();
+  resolveTypewriter.textContent = '';
+  var resolveTimer;
+
   function startResolve() {
     if (resolveTypewriter.classList.contains('is-typing') || resolveTypewriter.classList.contains('is-done')) return;
     if (reduceMotion) {
+      resolveTypewriter.textContent = resolveText;
       resolveTypewriter.classList.add('is-done');
       return;
     }
     resolveTypewriter.classList.add('is-typing');
-    resolveTypewriter.addEventListener('animationend', function (e) {
-      if (e.animationName === 'type' || e.animationName === 'resolve-fade') {
+    var index = 0;
+    resolveTimer = window.setInterval(function () {
+      resolveTypewriter.textContent = resolveText.slice(0, index += 1);
+      if (index >= resolveText.length) {
+        window.clearInterval(resolveTimer);
         resolveTypewriter.classList.remove('is-typing');
         resolveTypewriter.classList.add('is-done');
       }
-    }, { once: true });
+    }, 44);
   }
 
   function crossLine(line) {
