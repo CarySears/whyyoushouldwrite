@@ -255,19 +255,28 @@
     border-radius:18px;padding:28px;
     display:flex;flex-direction:column;
   }
-  .host-card .host-photo{
+  .host-photo-frame{
     width:120px;
     height:120px;
     border-radius:50%;
-    object-fit:cover;
-    object-position:center top;
-    margin-bottom:18px;
+    overflow:hidden;
     border:3px solid var(--shell);
-    display:block;
+    margin-bottom:18px;
     flex-shrink:0;
   }
-  .host-card .host-photo--anna{
-    object-position:center 18%;
+  .host-card .host-photo{
+    width:100%;
+    height:100%;
+    border-radius:0;
+    object-fit:cover;
+    object-position:center top;
+    margin:0;
+    border:none;
+    display:block;
+  }
+  .host-photo-frame--anna .host-photo{
+    transform:scale(0.82);
+    transform-origin:center 38%;
   }
   .host-card .label{color:var(--ochre);margin-bottom:8px;}
   .host-card h3{font-family:'Playfair Display',serif;color:var(--sea);font-size:1.3rem;margin-bottom:10px;}
@@ -436,14 +445,18 @@
     <p class="hosts-lede">Two guides bringing together emotional safety, creative encouragement, and practical structure.</p>
     <div class="hosts">
       <div class="host-card">
-        <img class="host-photo host-photo--anna" src="images/anna-brooke.png" alt="Anna Brooke">
+        <div class="host-photo-frame host-photo-frame--anna">
+          <img class="host-photo" src="images/anna-brooke.png" alt="Anna Brooke">
+        </div>
         <div class="label">Host</div>
         <h3>Anna Brooke</h3>
         <p>For more than twenty years, Anna has supported people through transitions both big and small. Her work offers a soft place to land while helping people reconnect with their truth, voice, and inner wisdom.</p>
         <p class="credit">Her work has been featured in Huffington Post, BuzzFeed, and Page Six.</p>
       </div>
       <div class="host-card">
-        <img class="host-photo" src="images/vindy-teja.png" alt="Vindy Teja">
+        <div class="host-photo-frame">
+          <img class="host-photo" src="images/vindy-teja.png" alt="Vindy Teja">
+        </div>
         <div class="label">Co-host</div>
         <h3>Vindy Teja</h3>
         <p>Vindy Teja is a Professional Life &amp; Divorce Coach, TEDx Speaker, author, and writing mentor.</p>
