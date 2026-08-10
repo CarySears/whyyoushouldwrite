@@ -260,8 +260,14 @@
     height:120px;
     border-radius:50%;
     object-fit:cover;
+    object-position:center top;
     margin-bottom:18px;
     border:3px solid var(--shell);
+    display:block;
+    flex-shrink:0;
+  }
+  .host-card .host-photo--anna{
+    object-position:center 18%;
   }
   .host-card .label{color:var(--ochre);margin-bottom:8px;}
   .host-card h3{font-family:'Playfair Display',serif;color:var(--sea);font-size:1.3rem;margin-bottom:10px;}
@@ -284,9 +290,11 @@
   }
   .book-card .book-cover{
     width:140px;
+    height:auto;
     flex-shrink:0;
     border-radius:8px;
     box-shadow:0 8px 24px rgba(22,74,80,.18);
+    display:block;
   }
   .book-card .book-copy{flex:1 1 240px;}
   .book-card .label{color:var(--ochre);margin-bottom:10px;}
@@ -428,14 +436,14 @@
     <p class="hosts-lede">Two guides bringing together emotional safety, creative encouragement, and practical structure.</p>
     <div class="hosts">
       <div class="host-card">
-        <img class="host-photo" src="https://assets.cdn.filesafe.space/jNqy5QsBJRJ9cjslwRNp/media/684dd3a28bc25a3f9d44af4d.png" alt="Anna Brooke">
+        <img class="host-photo host-photo--anna" src="images/anna-brooke.png" alt="Anna Brooke">
         <div class="label">Host</div>
         <h3>Anna Brooke</h3>
         <p>For more than twenty years, Anna has supported people through transitions both big and small. Her work offers a soft place to land while helping people reconnect with their truth, voice, and inner wisdom.</p>
         <p class="credit">Her work has been featured in Huffington Post, BuzzFeed, and Page Six.</p>
       </div>
       <div class="host-card">
-        <img class="host-photo" src="https://assets.cdn.filesafe.space/jNqy5QsBJRJ9cjslwRNp/media/6a0e11f9ce0ec8e60c264694.png" alt="Vindy Teja">
+        <img class="host-photo" src="images/vindy-teja.png" alt="Vindy Teja">
         <div class="label">Co-host</div>
         <h3>Vindy Teja</h3>
         <p>Vindy Teja is a Professional Life &amp; Divorce Coach, TEDx Speaker, author, and writing mentor.</p>
@@ -457,7 +465,7 @@
     </div>
 
     <div class="book-card">
-      <img class="book-cover" src="https://assets.cdn.filesafe.space/jNqy5QsBJRJ9cjslwRNp/media/6a0e126b1e90e4b6068b71dd.png" alt="WRITE! Your Guide to Revealing the Writer Within book cover">
+      <img class="book-cover" src="images/write-book-cover.png" alt="WRITE! Your Guide to Revealing the Writer Within book cover">
       <div class="book-copy">
         <div class="label">Co-authors of</div>
         <h3>WRITE! Your Guide to Revealing the Writer Within</h3>
