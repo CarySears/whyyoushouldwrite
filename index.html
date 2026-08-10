@@ -303,6 +303,7 @@
   /* ---------- final cta ---------- */
   .final{
     text-align:center;padding:90px 0 110px;
+    scroll-margin-top:96px;
   }
   .final h2{
     font-family:'Playfair Display',serif;font-weight:700;
@@ -489,7 +490,7 @@
     <div class="section-title">Good to know</div>
     <div class="faq-item">
       <h3>Is this really free?</h3>
-      <p>Yes, Why You Should Write is a free, one-hour class. You just need to reserve a ticket to get the Zoom link.</p>
+      <p>Yes, Why You Should Write is a free, one-hour class. Just register below to get the Zoom link.</p>
     </div>
     <div class="faq-item">
       <h3>How do I join?</h3>
@@ -594,6 +595,27 @@
   }, { threshold: 0.75, rootMargin: '0px 0px -8% 0px' });
 
   doubtLines.forEach(function (line) { observer.observe(line); });
+})();
+</script>
+<script>
+(function () {
+  function scrollToReserve(e) {
+    if (e) e.preventDefault();
+    var target = document.getElementById('reserve');
+    if (target) {
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      history.replaceState(null, '', '#reserve');
+    }
+  }
+
+  document.querySelectorAll('.cta-mini, .cta-primary').forEach(function (btn) {
+    btn.setAttribute('href', '#reserve');
+    btn.addEventListener('click', scrollToReserve);
+  });
+
+  if (window.location.hash === '#reserve') {
+    window.requestAnimationFrame(scrollToReserve);
+  }
 })();
 </script>
 <script src="https://links.annabrookehealing.com/js/form_embed.js"></script>
